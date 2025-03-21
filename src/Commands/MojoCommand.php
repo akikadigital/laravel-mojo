@@ -1,12 +1,12 @@
 <?php
 
-namespace VendorName\Skeleton\Commands;
+namespace Akika\Mojo\Commands;
 
 use Illuminate\Console\Command;
 
-class SkeletonCommand extends Command
+class MojoCommand extends Command
 {
-    public $signature = 'skeleton';
+    public $signature = 'laravel-mojo';
 
     public $description = 'My command';
 
