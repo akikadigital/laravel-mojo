@@ -2,9 +2,9 @@
 
 namespace Akika\Mojo\Tests;
 
+use Akika\Mojo\MojoServiceProvider;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Orchestra\Testbench\TestCase as Orchestra;
-use Akika\Mojo\MojoServiceProvider;
 
 class TestCase extends Orchestra
 {
