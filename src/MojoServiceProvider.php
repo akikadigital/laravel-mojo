@@ -2,9 +2,9 @@
 
 namespace Akika\Mojo;
 
+use Akika\Mojo\Commands\MojoCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use Akika\Mojo\Commands\MojoCommand;
 
 class MojoServiceProvider extends PackageServiceProvider
 {
