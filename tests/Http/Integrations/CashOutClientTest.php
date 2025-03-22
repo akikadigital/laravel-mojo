@@ -5,6 +5,7 @@ use Akika\Mojo\Enums\MobileNetwork;
 use Akika\Mojo\Http\Integrations\CashoutClient;
 use Illuminate\Http\Client\Request;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Str;
 
 it('can initiateGlobalCashout', function () {
     $baseUrl = config('mojo.dev.cashout_url');
@@ -42,4 +43,8 @@ it('can initiateGlobalCashout', function () {
     });
 
     expect($response)->toHaveSnakeCaseKeys();
+
+    $keys = collect(array_keys($data))->map(fn (string $key) => Str::snake($key))->toArray();
+
+    expect($response)->toHaveKeys($keys);
 });

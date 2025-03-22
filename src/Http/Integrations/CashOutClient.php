@@ -60,8 +60,9 @@ class CashoutClient
      * @param  string  $merchantRef  (Required) Merchant transaction reference
      * @param  ?string  $narration  (Optional) Narration for transaction
      * @param  string  $transactionType  (Required) Defaults to `local`
-     *                                   ___
-     *                                   This will create a new MOMO Cashout Transaction
+     *
+     * ---
+     * This will create a new MOMO Cashout Transaction
      */
     public function initiateGlobalCashout(
         Carbon $transactionDate,
