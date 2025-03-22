@@ -2,7 +2,6 @@
 
 namespace Akika\Mojo;
 
-use Akika\Mojo\Commands\MojoCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 
@@ -17,9 +16,6 @@ class MojoServiceProvider extends PackageServiceProvider
          */
         $package
             ->name('laravel-mojo')
-            ->hasConfigFile()
-            ->hasViews()
-            ->hasMigration('create_laravel_mojo_table')
-            ->hasCommand(MojoCommand::class);
+            ->hasConfigFile();
     }
 }
