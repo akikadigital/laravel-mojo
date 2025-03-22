@@ -184,4 +184,17 @@ class CashoutClient
             'country_code' => $countryCode,
         ]);
     }
+
+    /**
+     * @param  string  $merchantRef  (Required) Merchant Transaction reference
+     *
+     * ---
+     * Check Status of the transaction
+     */
+    public function getTxnStatus(string $merchantRef): Response
+    {
+        return $this->http('/GetTxnStatus', [
+            'merchant_ref' => $merchantRef,
+        ]);
+    }
 }

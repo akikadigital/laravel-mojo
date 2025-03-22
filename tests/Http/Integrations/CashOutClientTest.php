@@ -118,3 +118,28 @@ it('can getBankList', function () {
 
     expect($response)->toHaveKey('country_code', $countryCode);
 });
+
+it('can getTxnStatus', function () {
+    $baseUrl = config('mojo.dev.cashout_url');
+    Http::fake([
+        "{$baseUrl}/Cashout/GetTxnStatus" => Http::response(['status_code' => 1], 200),
+    ]);
+
+    $client = new CashoutClient;
+
+    $merchantRef = fake()->word();
+
+    $client->getTxnStatus($merchantRef);
+
+    $response = null;
+    Http::assertSent(function (Request $request) use (&$response) {
+        $response = $request->data();
+
+        return $request['app_id'] == config('mojo.dev.app_id') &&
+            $request['app_key'] == config('mojo.dev.app_key');
+    });
+
+    expect($response)->toHaveSnakeCaseKeys();
+
+    expect($response)->toHaveKey('merchant_ref', $merchantRef);
+});
