@@ -45,6 +45,8 @@ class CashoutClient
     }
 
     /**
+     * This will create a new MOMO Cashout Transaction
+     *
      * @param  Carbon  $transactionDate  (Required) Transaction Date
      * @param  Carbon  $expiryDate  (Required) Transaction Date
      * @param  string  $payerName  (Required) Payer/Sender Name
@@ -60,9 +62,6 @@ class CashoutClient
      * @param  string  $merchantRef  (Required) Merchant transaction reference
      * @param  ?string  $narration  (Optional) Narration for transaction
      * @param  string  $transactionType  (Required) Defaults to `local`
-     *
-     * ---
-     * This will create a new MOMO Cashout Transaction
      */
     public function initiateGlobalCashout(
         Carbon $transactionDate,
@@ -101,6 +100,8 @@ class CashoutClient
     }
 
     /**
+     * This will create a new BAT (Bank Account Transfer) Transactions.
+     *
      * @param  Carbon  $transactionDate  (Required) Transaction Date
      * @param  Carbon  $expiryDate  (Required) Transaction Date
      * @param  string  $payerName  (Required) Payer/Sender Name
@@ -122,9 +123,6 @@ class CashoutClient
      * @param  string  $merchantRef  (Required) Merchant transaction reference
      * @param  ?string  $narration  (Optional) Narration for transaction
      * @param  string  $transactionType  (Required) Defaults to `local`
-     *
-     * ---
-     * This will create a new BAT (Bank Account Transfer) Transactions.
      */
     public function bankTransfer(
         Carbon $transactionDate,
@@ -173,10 +171,9 @@ class CashoutClient
     }
 
     /**
-     * @param  string  $countryCode  (Required) ISO 3166-1 alpha-3 country code (GHA, NG)
-     *
-     * ---
      * Allowed bank listing
+     *
+     * @param  string  $countryCode  (Required) ISO 3166-1 alpha-3 country code (GHA, NG)
      */
     public function getBankList(string $countryCode): Response
     {
@@ -186,10 +183,9 @@ class CashoutClient
     }
 
     /**
-     * @param  string  $merchantRef  (Required) Merchant Transaction reference
-     *
-     * ---
      * Check Status of the transaction
+     *
+     * @param  string  $merchantRef  (Required) Merchant Transaction reference
      */
     public function getTxnStatus(string $merchantRef): Response
     {
@@ -209,14 +205,14 @@ class CashoutClient
     }
 
     /**
+     * Validate customer bank account.
+     *
      * @param  ?string  $bankName  (Optional) Destination bank name
      * @param  ?string  $bankBranchSortCode  (Optional) Destination bank branch code
      * @param  string  $bankCode  (Required) The bank code of the destination bank.
      * @param  string  $bankAccountNo  (Required) Account number of the beneficiary.
      * @param  ?string  $bankAccountTitle  (Optional) Account title of the beneficiary
      *                                     in case of BAT (bank account transfer)
-     *                                     ---
-     *                                     Validate customer bank account.
      */
     public function validateBankAccount(
         ?string $bankName,
@@ -231,6 +227,20 @@ class CashoutClient
             'bank_code' => $bankCode,
             'bank_account_no' => $bankAccountNo,
             'bank_account_title' => $bankAccountTitle,
+        ]);
+    }
+
+    /**
+     * Validate customer mobile account
+     *
+     * @param  string  $mobile  (Required) Mobile number
+     * @param  MobileNetwork  $network  (Required) Carrier mobile network
+     */
+    public function getAccountProfile(string $mobile, MobileNetwork $network): Response
+    {
+        return $this->http('/GetAccountProfile', [
+            'mobile' => $mobile,
+            'network' => $network->value,
         ]);
     }
 }
