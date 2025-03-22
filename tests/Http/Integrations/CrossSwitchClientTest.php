@@ -37,7 +37,7 @@ it('can createMMPayment', function () {
 
     $response = null;
     Http::assertSent(function (Request $request) use (&$response) {
-        $response = json_decode($request->body(), true);
+        $response = $request->data();
 
         return $request['app_id'] == config('mojo.dev.app_id');
     });
