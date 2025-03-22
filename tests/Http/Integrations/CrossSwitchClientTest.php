@@ -6,6 +6,7 @@ use Akika\Mojo\Enums\MobileNetwork;
 use Akika\Mojo\Http\Integrations\CrossSwitchClient;
 use Illuminate\Http\Client\Request;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Str;
 
 it('can createMMPayment', function () {
     $baseUrl = config('mojo.dev.cross_switch_url');
@@ -26,7 +27,7 @@ it('can createMMPayment', function () {
         'voucherCode' => fake()->word(),
         'orderDesc' => fake()->sentence(),
         'currency' => Currency::GHS,
-        'feeTypeCode' => FeeTypeCode::GENERALPAYMENT,
+        'feetypecode' => FeeTypeCode::GENERALPAYMENT,
     ];
 
     $client->createMMPayment(...$data);
@@ -40,6 +41,9 @@ it('can createMMPayment', function () {
     });
 
     expect($response)->toHaveSnakeCaseKeys();
+
+    $keys = collect(array_keys($data))->map(fn (string $key) => Str::snake($key))->toArray();
+    expect($response)->toHaveKeys($keys);
 });
 
 it('can getInvoiceStatus', function () {

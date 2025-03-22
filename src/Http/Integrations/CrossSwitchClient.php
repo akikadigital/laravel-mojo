@@ -61,7 +61,7 @@ class CrossSwitchClient
      *                                Vodafone it is also optional
      * @param  string  $orderDesc  (Required) Description or detail of order
      * @param  ?Currency  $currency  (Required) Payment Currency Cod (GHS)
-     * @param  ?FeeTypeCode  $feeTypeCode  (Optional) Fee Type that customer wants to pay
+     * @param  ?FeeTypeCode  $feetypecode  (Optional) Fee Type that customer wants to pay
      */
     public function createMMPayment(
         string $mobile,
@@ -74,7 +74,7 @@ class CrossSwitchClient
         ?string $voucherCode,
         ?string $orderDesc,
         ?Currency $currency = Currency::GHS,
-        ?FeeTypeCode $feeTypeCode = FeeTypeCode::GENERALPAYMENT,
+        ?FeeTypeCode $feetypecode = FeeTypeCode::GENERALPAYMENT,
     ): Response {
         // Sha1 checksum of following parameters app_id + app_key + Client_timestamp + order_id + Amount
         $signature = $clientTimestamp
@@ -87,7 +87,7 @@ class CrossSwitchClient
             'mobile_network' => $mobileNetwork->value,
             'mobile' => $mobile,
             'email' => $email,
-            'feetypecode' => $feeTypeCode?->value,
+            'feetypecode' => $feetypecode?->value,
             'currency' => $currency->value,
             'amount' => $amount,
             'voucher_code' => $voucherCode,
