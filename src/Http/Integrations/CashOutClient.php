@@ -113,7 +113,7 @@ class CashoutClient
      * @param  Currency  $currency  (Required) ISO 4217 currency
      * @param  ?string  $country  (Optional) ISO 3166-1 alpha-3 country code
      * @param  float  $amount  (Required) Transacted Amount
-     * @param  string  $bankName  (Required) Destination bank name
+     * @param  ?string  $bankName  (Optional) Destination bank name
      * @param  string  $bankBranchSortCode  (Required) Destination bank branch code
      * @param  string  $bankCode  (Required) The bank code of the destination bank.
      * @param  string  $bankAccountNo  (Required) Account number of the beneficiary.
@@ -139,7 +139,7 @@ class CashoutClient
         Currency $currency,
         string $country,
         float $amount,
-        string $bankName,
+        ?string $bankName,
         string $bankBranchSortCode,
         string $bankCode,
         string $bankAccountNo,
@@ -205,6 +205,32 @@ class CashoutClient
     {
         return $this->http('/CheckAvailableBalance', [
             'currency_code' => $currencyCode->value,
+        ]);
+    }
+
+    /**
+     * @param  ?string  $bankName  (Optional) Destination bank name
+     * @param  ?string  $bankBranchSortCode  (Optional) Destination bank branch code
+     * @param  string  $bankCode  (Required) The bank code of the destination bank.
+     * @param  string  $bankAccountNo  (Required) Account number of the beneficiary.
+     * @param  ?string  $bankAccountTitle  (Optional) Account title of the beneficiary
+     *                                     in case of BAT (bank account transfer)
+     *                                     ---
+     *                                     Validate customer bank account.
+     */
+    public function validateBankAccount(
+        ?string $bankName,
+        string $bankBranchSortCode,
+        string $bankCode,
+        string $bankAccountNo,
+        string $bankAccountTitle,
+    ): Response {
+        return $this->http('/ValidateBankAccount', [
+            'bank_name' => $bankName,
+            'bank_branch_sort_code' => $bankBranchSortCode,
+            'bank_code' => $bankCode,
+            'bank_account_no' => $bankAccountNo,
+            'bank_account_title' => $bankAccountTitle,
         ]);
     }
 }
