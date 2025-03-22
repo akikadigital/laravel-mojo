@@ -74,7 +74,7 @@ class CashoutClient
         string $payeeMobile,
         MobileNetwork $mobileNetwork,
         Currency $currency,
-        string $country,
+        ?string $country,
         float $amount,
         string $merchantRef,
         ?string $narration,
@@ -135,7 +135,7 @@ class CashoutClient
         string $payeeMobile,
         MobileNetwork $mobileNetwork,
         Currency $currency,
-        string $country,
+        ?string $country,
         float $amount,
         ?string $bankName,
         string $bankBranchSortCode,
@@ -216,7 +216,7 @@ class CashoutClient
      */
     public function validateBankAccount(
         ?string $bankName,
-        string $bankBranchSortCode,
+        ?string $bankBranchSortCode,
         string $bankCode,
         string $bankAccountNo,
         string $bankAccountTitle,
