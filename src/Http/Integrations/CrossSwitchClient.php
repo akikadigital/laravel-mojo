@@ -96,4 +96,14 @@ class CrossSwitchClient
             'signature' => $signature,
         ]);
     }
+
+    /**
+     * @param  string  $orderId  Merchant Transaction Reference Number.
+     */
+    public function getInvoiceStatus(string $orderId): Response
+    {
+        return $this->http('/GetInvoiceStatus', [
+            'order_id' => $orderId,
+        ]);
+    }
 }
