@@ -9,7 +9,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Client\Response;
 use Illuminate\Support\Facades\Http;
 
-class CashoutClient
+class CashOutClient
 {
     private string $baseUrl;
 
