@@ -197,4 +197,14 @@ class CashoutClient
             'merchant_ref' => $merchantRef,
         ]);
     }
+
+    /**
+     * Check Float Balance.
+     */
+    public function checkAvailableBalance(Currency $currencyCode): Response
+    {
+        return $this->http('/CheckAvailableBalance', [
+            'currency_code' => $currencyCode->value,
+        ]);
+    }
 }

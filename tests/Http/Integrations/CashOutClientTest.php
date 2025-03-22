@@ -143,3 +143,28 @@ it('can getTxnStatus', function () {
 
     expect($response)->toHaveKey('merchant_ref', $merchantRef);
 });
+
+it('can checkAvailableBalance', function () {
+    $baseUrl = config('mojo.dev.cashout_url');
+    Http::fake([
+        "{$baseUrl}/Cashout/CheckAvailableBalance" => Http::response(['status_code' => 1], 200),
+    ]);
+
+    $client = new CashoutClient;
+
+    $currencyCode = fake()->randomElement(Currency::cases());
+
+    $client->checkAvailableBalance($currencyCode);
+
+    $response = null;
+    Http::assertSent(function (Request $request) use (&$response) {
+        $response = $request->data();
+
+        return $request['app_id'] == config('mojo.dev.app_id') &&
+            $request['app_key'] == config('mojo.dev.app_key');
+    });
+
+    expect($response)->toHaveSnakeCaseKeys();
+
+    expect($response)->toHaveKey('currency_code', $currencyCode->value);
+});
