@@ -65,3 +65,29 @@ it('can getInvoiceStatus', function () {
     expect($response)->toHaveSnakeCaseKeys();
     expect($response)->toHaveKey('order_id', $orderId);
 });
+
+it('can getAccountProfile', function () {
+    $baseUrl = config('mojo.dev.cross_switch_url');
+    Http::fake([
+        "{$baseUrl}/Interapi.svc/GetAccountProfile" => Http::response(['status_code' => 1], 200),
+    ]);
+
+    $client = new CrossSwitchClient;
+
+    $network = fake()->randomElement(MobileNetwork::cases());
+    $mobile = fake()->numerify('+2###########');
+
+    $client->getAccountProfile($network, $mobile);
+
+    $response = null;
+    Http::assertSent(function (Request $request) use (&$response) {
+        $response = $request->data();
+
+        return $request['app_id'] == config('mojo.dev.app_id') &&
+            $request['app_key'] == config('mojo.dev.app_key');
+    });
+
+    expect($response)->toHaveSnakeCaseKeys();
+    expect($response)->toHaveKey('network', $network);
+    expect($response)->toHaveKey('mobile', $mobile);
+});

@@ -106,4 +106,13 @@ class CrossSwitchClient
             'order_id' => $orderId,
         ]);
     }
+
+    /**
+     * @param  MobileNetwork  $network  Telco Code
+     * @param  string  $mobile  Customer Mobile number
+     */
+    public function getAccountProfile(MobileNetwork $network, string $mobile): Response
+    {
+        return $this->http('/GetAccountProfile', compact('network', 'mobile'));
+    }
 }
