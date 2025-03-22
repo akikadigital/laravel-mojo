@@ -171,4 +171,17 @@ class CashoutClient
             'transaction_type' => $transactionType,
         ]);
     }
+
+    /**
+     * @param  string  $countryCode  (Required) ISO 3166-1 alpha-3 country code (GHA, NG)
+     *
+     * ---
+     * Allowed bank listing
+     */
+    public function getBankList(string $countryCode): Response
+    {
+        return $this->http('/GetBankList', [
+            'country_code' => $countryCode,
+        ]);
+    }
 }
