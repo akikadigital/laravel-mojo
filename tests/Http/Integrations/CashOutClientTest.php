@@ -2,7 +2,7 @@
 
 use Akika\Mojo\Enums\Currency;
 use Akika\Mojo\Enums\MobileNetwork;
-use Akika\Mojo\Http\Integrations\CashoutClient;
+use Akika\Mojo\Http\Integrations\CashOutClient;
 use Illuminate\Http\Client\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Str;
@@ -13,7 +13,7 @@ it('can initiateGlobalCashout', function () {
         "{$baseUrl}/Cashout/InitiateGlobalCashout" => Http::response(['status_code' => 1], 200),
     ]);
 
-    $client = new CashoutClient;
+    $client = new CashOutClient;
 
     $data = [
         'transactionDate' => now(),
@@ -54,7 +54,7 @@ it('can bankTransfer', function () {
         "{$baseUrl}/Cashout/BankTransfer" => Http::response(['status_code' => 1], 200),
     ]);
 
-    $client = new CashoutClient;
+    $client = new CashOutClient;
 
     $data = [
         'transactionDate' => now(),
@@ -100,7 +100,7 @@ it('can getBankList', function () {
         "{$baseUrl}/Cashout/GetBankList" => Http::response(['status_code' => 1], 200),
     ]);
 
-    $client = new CashoutClient;
+    $client = new CashOutClient;
 
     $countryCode = fake()->countryCode();
 
@@ -125,7 +125,7 @@ it('can getTxnStatus', function () {
         "{$baseUrl}/Cashout/GetTxnStatus" => Http::response(['status_code' => 1], 200),
     ]);
 
-    $client = new CashoutClient;
+    $client = new CashOutClient;
 
     $merchantRef = fake()->word();
 
@@ -150,7 +150,7 @@ it('can checkAvailableBalance', function () {
         "{$baseUrl}/Cashout/CheckAvailableBalance" => Http::response(['status_code' => 1], 200),
     ]);
 
-    $client = new CashoutClient;
+    $client = new CashOutClient;
 
     $currencyCode = fake()->randomElement(Currency::cases());
 
@@ -175,7 +175,7 @@ it('can validateBankAccount', function () {
         "{$baseUrl}/Cashout/ValidateBankAccount" => Http::response(['status_code' => 1], 200),
     ]);
 
-    $client = new CashoutClient;
+    $client = new CashOutClient;
 
     $data = [
         'bankName' => fake()->word(),
@@ -206,7 +206,7 @@ it('can getAccountProfile', function () {
         "{$baseUrl}/Cashout/GetAccountProfile" => Http::response(['status_code' => 1], 200),
     ]);
 
-    $client = new CashoutClient;
+    $client = new CashOutClient;
 
     $mobile = fake()->phoneNumber();
     $network = fake()->randomElement(MobileNetwork::cases());
