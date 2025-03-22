@@ -35,7 +35,7 @@ class CrossSwitchClient
             : config('mojo.dev.app_key');
     }
 
-    public function http(string $path, array $body): Response
+    private function http(string $path, array $body): Response
     {
         return Http::post("{$this->baseUrl}/Interapi.svc{$path}", [
             ...$body,
