@@ -219,7 +219,7 @@ class CashoutClient
         ?string $bankBranchSortCode,
         string $bankCode,
         string $bankAccountNo,
-        string $bankAccountTitle,
+        ?string $bankAccountTitle,
     ): Response {
         return $this->http('/ValidateBankAccount', [
             'bank_name' => $bankName,
